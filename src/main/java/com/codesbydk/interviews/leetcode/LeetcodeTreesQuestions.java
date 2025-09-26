@@ -249,7 +249,7 @@ public class LeetcodeTreesQuestions {
 
         int low = 0;
         int high = nums.length - 1;
-        if (low <=high) {
+        if (low <= high) {
             return sortedArrayToBST(nums, low, high);
         }
 
@@ -284,30 +284,29 @@ public class LeetcodeTreesQuestions {
 
         return leftSum || rightSum;
     }
-    
 
     public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
-    
+
         if (root == null) {
-            return null;
+            return new ArrayList<>();
         }
         List<List<Integer>> path = new ArrayList<>();
         if (root.left == null && root.right == null && root.val == targetSum) {
-            
+            path.add(new ArrayList<>(List.of(root.val)));
             return path;
-        }
+        } 
         List<List<Integer>> pathLeft = pathSum(root.left, targetSum - root.val);
         List<List<Integer>> pathRight = pathSum(root.right, targetSum - root.val);
-        if (pathLeft != null) {
+        
+        if (!pathLeft.isEmpty()) {
             pathLeft.forEach(p -> p.addFirst(root.val));
             path.addAll(pathLeft);
         }
-        if (pathRight != null) {
+        if (!pathRight.isEmpty()) {
             pathRight.forEach(p -> p.addFirst(root.val));
             path.addAll(pathRight);
         }
-        // pathRight.forEach(p-> p.addFirst(root.val));
-        
+
         return path;
     }
 
@@ -336,16 +335,17 @@ public class LeetcodeTreesQuestions {
         // System.out.println(result);
         // System.out.println(sa.dfs(root));
 
-        // Integer[] bfsNull = new Integer[] { 1, 2, 3, 4, 5, 6, 7, 8, null, null, 9,
-        // 10, null, null, 11 };
-        System.out.println(sa.bfs(root) );
+        Integer[] bfsNull = new Integer[] { 5,4,8,11,null,13,4,7,2,null,null, null, null,5, 1};
+        // System.out.println(sa.bfs(root));
         // System.out.println(sa.preorder(root));
         // System.out.println(sa.zigzagLevelOrder(root));
         // System.out.println(sa.maxDepth(root));
-
-        // System.out.println(sa.bfs(sa.sortedArrayToBST(new int[] {1,2,3,4,5,6,7})));
-        System.out.println(sa.hasPathSum(root, 20));
-        System.out.println(sa.pathSum(root, 20));
+        TreeNode node = sa.bftToTree(bfsNull);
+        System.out.println(sa.bfs(node));
+        System.out.println(sa.dfs(node));
+        // System.out.println(sa.bfs(sa.sortedArrayToBST()));
+        System.out.println(sa.hasPathSum(node, 22));
+        System.out.println(sa.pathSum(node, 22));
 
     }
 

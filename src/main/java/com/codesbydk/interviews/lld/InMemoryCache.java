@@ -5,8 +5,6 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingDeque;
 
-import lombok.val;
-
 public class InMemoryCache<K,V> {
 
     private Integer size;
